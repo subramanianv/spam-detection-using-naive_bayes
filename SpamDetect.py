@@ -5,8 +5,11 @@ from StringUtility import StringUtility
 #import Naive_bayes from naive_bayes
 import sys
 import getopt
-
+import pickle
+from naive_bayes import Naive_bayes
 if __name__ == "__main__":
+    wordlist=pickle.load(open("wordlist.p","rb"))
+    
     stopwords=[line.strip() for line in open('stopwords.txt')]
     if len(sys.argv)==1 or len(sys.argv)>2:
        print "Usage:python SpamDetect.py <filename>"
@@ -19,5 +22,11 @@ if __name__ == "__main__":
         words=[x.lower() for s in strs for x in s.split()]
         cleanwords=[word for word in words if word not in stopwords and len(word)>3 and len(word) < 12]
         stemmed_words=[stem(word) for word in cleanwords]
-        print stemmed_words
-        
+        vec=StringUtility.WordsToVector(wordlist,stemmed_words)
+        print stemmed_words 
+        classifier = Naive_bayes("params.p")
+        if classifier.classify(np.array(vec))==1:
+            print "Spam"
+        else:
+             print "Not Spam"
+
