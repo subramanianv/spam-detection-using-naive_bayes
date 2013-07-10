@@ -7,7 +7,7 @@ class StringUtility:
         returnVec=[0]*len(wordlist)
         for word in email:
             if word in wordlist:
-                returnVec[wordlist.index(word)]=1
+                returnVec[wordlist.index(word)]+=1
         return returnVec
 
     @staticmethod

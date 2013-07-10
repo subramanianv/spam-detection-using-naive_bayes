@@ -47,8 +47,8 @@ class Naive_bayes:
         #print "false",self.pfalse;
         #print xv.shape,self.p1v.shape,self.p0v.shape
         #print type(xv),type(self.p1v)
-        p1 = np.dot(xv,np.asarray(self.p1v).reshape(-1))# + log(self.pTrue)
-        p0 = np.dot(xv,np.asarray(self.p0v).reshape(-1))# + log(self.pfalse)
+        p1 = np.dot(xv,np.asarray(self.p1v).reshape(-1)) + log(self.pTrue)
+        p0 = np.dot(xv,np.asarray(self.p0v).reshape(-1)) + log(self.pfalse)
         print p1,p0
         if p1>p0:
            return 1
